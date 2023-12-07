@@ -1,35 +1,59 @@
 //this includes the vehicle class as a module
-import Vehicle from './vehicleBaseClass.js';
+import { Vehicle } from './vehicleBaseClass.js'; // Using require syntax
 
-//this shows how to call from this module...
-let v = new Vehicle("Mercury", "Sedan", "1965", "color", "mileage");
-console.log(v.make)
+class Car extends VehicleModule {
+  constructor(make, model, year, color, mileage) {
+    super(make, model, year, color, mileage);
 
+    this.maximumPassengers = 5;
+    this.passengers = 0;
+    this.numberOfWheels = 4;
+    this.maximumSpeed = 160;
+    this.fuel = 10;
+    this.needsService = false; // Changed the property name to needsService
+  }
 
-//After you write the derived Car class, you should test it out.
+  loadPassenger(num) {
+    // Logic for loading passengers
+    if (this.passengers < this.maximumPassengers) {
+      this.passengers += num;
+      console.log(`Loaded ${num} passengers. Total passengers: ${this.passengers}`);
+    } else {
+      console.log("Maximum passengers reached.");
+    }
+  }
 
-//Note: You can code your derived Car class here or make a file named index.js and do it there.
+  start() {
+    // Logic for starting the car
+    if (this.fuel > 0) {
+      console.log("Car started.");
+    } else {
+      console.log("Fuel is empty. Cannot start.");
+    }
+  }
 
+  stop() {
+    // Logic for stopping the car
+    console.log("Car stopped.");
+  }
 
-//TO DO: Code the Car subclass here or in index.js file, i.e. class Car extends Vehicle ...
+  checkService() {
+    // Logic for checking service
+    if (this.mileage > 30000) {
+      this.needsService = true;
+      console.log("Time for maintenance/service.");
+    } else {
+      console.log("No maintenance needed yet.");
+    }
+  }
+}
 
+let myCar = new Car('mercury', 'rad_sedan', '2002', 'white', 50000);
 
+myCar.start();
+myCar.loadPassenger(5);
+//myCar.stop(); // Uncomment this line if a stop method is implemented in the Car class.
+myCar.checkService();
+myCar.maximumSpeed(200);
+console.log(myCar);
 
-
-
-
-
-
-
-
-
-
-//TO DO: Creating Instances and Testing Them
-
-//You can use the same instance "v" of the Vehicle class above for the base class.
-
-
-
-
-
-//Create at least two new instances of the Car class and test them here:
